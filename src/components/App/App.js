@@ -1,6 +1,7 @@
 import { AppWrapper } from './App.styled';
 import { Global } from 'styles/Global.styled';
 
+
 export const App = () => {
   return (
     <>
@@ -9,3 +10,5 @@ export const App = () => {
     </>
   );
 };
+
+
