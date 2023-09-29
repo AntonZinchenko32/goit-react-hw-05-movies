@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getMoviesBySearch = query => {
+const getMoviesBySearch = async query => {
   const options = {
     method: 'GET',
     url: 'https://api.themoviedb.org/3/search/movie',
@@ -12,10 +12,11 @@ const getMoviesBySearch = query => {
     },
   };
 
-  axios
+  await axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
+      console.log(response.data.results);
+      return response.data.results
     })
     .catch(function (error) {
       console.error(error);
