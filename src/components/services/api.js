@@ -12,15 +12,8 @@ const getMoviesBySearch = async query => {
     },
   };
 
-  await axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data.results);
-      return response.data.results
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  const {data} = await axios.request(options)
+  return data
 };
 
 export default getMoviesBySearch;
