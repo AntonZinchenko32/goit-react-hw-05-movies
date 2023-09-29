@@ -1,0 +1,25 @@
+import axios from 'axios';
+
+const getMoviesBySearch = query => {
+  const options = {
+    method: 'GET',
+    url: 'https://api.themoviedb.org/3/search/movie',
+    params: { query, include_adult: 'false', language: 'en-US', page: '1' },
+    headers: {
+      accept: 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Zjc0M2RlNDU3ZDViMzBiYWZkMmIzNWRiOWI2NjVjYyIsInN1YiI6IjY1MTZiN2U0OTY3Y2M3MDBjNTE4NjNhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._d9AXpjTuGyWcGExFAjlG2UnavuMrCOWucVNjUGVUgg',
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
+export default getMoviesBySearch;
