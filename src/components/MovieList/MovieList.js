@@ -10,7 +10,7 @@ export const MovieList = ({ movies }) => {
         {movies.map((movie) => (
           <CardWrapper key={movie.id}>
             <Link to={`${movie.id}`} state={{ from: location }}>
-              <MovieTitle>{movie.title} ({movie.release_date.slice(0,4)})</MovieTitle>
+              <MovieTitle>{movie.title}</MovieTitle>
             </Link>
           </CardWrapper>
         ))}
