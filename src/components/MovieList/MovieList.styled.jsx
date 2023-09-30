@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const CardWrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 4px;
-
+export const CardWrapper = styled.li`
   > a {
     text-decoration: none;
   }
@@ -17,7 +13,12 @@ export const CardWrapper = styled.div`
 
 export const MovieTitle = styled.h3`
   padding: 4px;
-  margin-top: 8px;
+  margin-top: 4px;
   margin-bottom: 0;
+
+  width: fit-content;
   color: black;
+  &:hover {
+    color: blue;
+  }
 `;
