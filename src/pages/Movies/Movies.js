@@ -1,29 +1,58 @@
-import { useSearchParams } from "react-router-dom";
-// import getMoviesBySearch from "components/services/api";
-import { SearchBar } from "components/SearchBar/SearchBar";
-import { MovieList } from "components/MovieList/MovieList";
+import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import getMoviesBySearch from 'components/services/api';
+import { SearchBar } from 'components/SearchBar/SearchBar';
+import { MovieList } from 'components/MovieList/MovieList';
 
-import { getProducts } from "components/services/fakeAPI";
+// import { getProducts } from "components/services/fakeAPI";
 
 const Movies = () => {
-
-  const movies =  getProducts();
+  const [query, setQuery] = useState('');
   
-  const [searchParams, setSearchParams] = useSearchParams();
-  const movieTitle = searchParams.get("name") ?? "";
+  const [movies, setMovies] = useState([]);
 
-  const visibleMovies = movies.filter((movie) =>
-    movie.name.toLowerCase().includes(movieTitle.toLowerCase())
+  useEffect(() => {
+    // Записуємо дані з бекенду
+    const fetchMovies = async () => {
+      try {
+        const data = await getMoviesBySearch(query);
+
+        setMovies(prevState => [...prevState, ...data.results]);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+      }
+    };
+    query && fetchMovies();
+  }, [query]);
+
+  const handleSearch = useCallback(value => {
+    setQuery(value);
+    setMovies([])
+  }, []);
+
+  // Скопійована логіка **********************************************************
+  // const movies =  getProducts();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieTitle = searchParams.get('title') ?? '';
+
+  const visibleMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(movieTitle.toLowerCase())
   );
 
-  const updateQueryString = (name) => {
-    const nextParams = name !== "" ? { name } : {};
+  const updateQueryString = title => {
+    const nextParams = title !== '' ? { title } : {};
     setSearchParams(nextParams);
   };
 
   return (
     <main>
-      <SearchBar value={movieTitle} onChange={updateQueryString} />
+      <SearchBar
+        value={movieTitle}
+        onChange={updateQueryString}
+        onSubmit={handleSearch}
+      />
       <MovieList movies={visibleMovies} />
     </main>
   );
