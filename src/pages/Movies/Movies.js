@@ -27,7 +27,6 @@ const Movies = () => {
 
   const handleSearch = useCallback(value => {
     setQuery(value);
-    setFoundMovies([]);
   }, []);
 
   const movieTitle = searchParams.get('title') ?? '';
