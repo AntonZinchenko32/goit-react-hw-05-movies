@@ -4,11 +4,9 @@ import getMoviesBySearch from 'components/services/api';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
 
-// import { getProducts } from "components/services/fakeAPI";
-
 const Movies = () => {
   const [query, setQuery] = useState('');
-  
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -16,6 +14,7 @@ const Movies = () => {
     const fetchMovies = async () => {
       try {
         const data = await getMoviesBySearch(query);
+        console.log(data.results);
 
         setMovies(prevState => [...prevState, ...data.results]);
       } catch (error) {
@@ -28,7 +27,7 @@ const Movies = () => {
 
   const handleSearch = useCallback(value => {
     setQuery(value);
-    setMovies([])
+    setMovies([]);
   }, []);
 
   // Скопійована логіка **********************************************************
