@@ -22,7 +22,7 @@ const Movies = () => {
 
   return (
     <main>
-      <SearchBar value={movieTitle} onChange={updateQueryString} />
+      <SearchBar value={movieTitle} onSubmit={updateQueryString} />
       <MovieList movies={visibleMovies} />
     </main>
   );
