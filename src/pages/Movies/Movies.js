@@ -3,13 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import getMoviesBySearch from 'components/services/search-movies';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
-// import fetchMovies from 'components/services/fetch-movies';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
 
   const [foundMovies, setFoundMovies] = useState([]);
-
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -18,16 +16,14 @@ const Movies = () => {
     const fetchMovies = async () => {
       try {
         const data = await getMoviesBySearch(query);
-        console.log(data.results);
 
-        setFoundMovies(prevState => [...prevState, ...data.results]);
+        setFoundMovies(data.results);
       } catch (error) {
         console.log(error.message);
-      } 
+      }
     };
     query && fetchMovies();
   }, [query]);
-
 
   const handleSearch = useCallback(value => {
     setQuery(value);
@@ -38,7 +34,7 @@ const Movies = () => {
 
   const updateQueryString = title => {
     const nextParams = title !== '' ? { title } : {};
-    setSearchParams(nextParams)
+    setSearchParams(nextParams);
   };
 
   return (
