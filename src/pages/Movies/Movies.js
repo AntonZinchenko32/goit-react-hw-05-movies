@@ -1,21 +1,31 @@
-import { Button } from "./Movies,styled";
+import { useSearchParams } from "react-router-dom";
 import getMoviesBySearch from "components/services/api";
-// import { SearchBox } from "components/SearchBox/SearchBox";
+import { SearchBox } from "components/SearchBox/SearchBox";
+import { MovieList } from "components/MovieList/MovieList";
 
 
 const Movies = () => {
 
-  const getResults = async () => {
-    const data = await getMoviesBySearch('sex')
-    console.log(data.results);
-  }
+  const movies =  getMoviesBySearch('sex');
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieTitle = searchParams.get("title") ?? "";
+
+  const visibleMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(movieTitle.toLowerCase())
+  );
+
+  const updateQueryString = (title) => {
+    const nextParams = title !== "" ? { title } : {};
+    setSearchParams(nextParams);
+  };
 
   return (
-    <div>
-      <Button type="button" onClick={()=>getResults()}>Search</Button>
-    </div>
-  )
+    <main>
+      <SearchBox value={movieTitle} onChange={updateQueryString} />
+      <MovieList movies={visibleMovies} />
+    </main>
+  );
 };
 
 export default Movies;
- 

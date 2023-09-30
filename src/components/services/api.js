@@ -13,7 +13,7 @@ const getMoviesBySearch = async query => {
   };
 
   const {data} = await axios.request(options)
-  return data
+  return data.results
 };
 
 export default getMoviesBySearch;
