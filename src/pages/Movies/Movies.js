@@ -36,9 +36,9 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieTitle = searchParams.get('title') ?? '';
 
-  const visibleMovies = movies.filter(movie =>
-    movie.title.toLowerCase().includes(movieTitle.toLowerCase())
-  );
+  // const visibleMovies = movies.filter(movie =>
+  //   movie.title.toLowerCase().includes(movieTitle.toLowerCase())
+  // );
 
   const updateQueryString = title => {
     const nextParams = title !== '' ? { title } : {};
@@ -52,7 +52,7 @@ const Movies = () => {
         onChange={updateQueryString}
         onSubmit={handleSearch}
       />
-      <MovieList movies={visibleMovies} />
+      <MovieList movies={movies} />
     </main>
   );
 };
