@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import getMoviesBySearch from "components/services/api";
-import { SearchBox } from "components/SearchBox/SearchBox";
+import { SearchBar } from "components/SearchBar/SearchBar";
 import { MovieList } from "components/MovieList/MovieList";
 
 
@@ -22,7 +22,7 @@ const Movies = () => {
 
   return (
     <main>
-      <SearchBox value={movieTitle} onChange={updateQueryString} />
+      <SearchBar value={movieTitle} onChange={updateQueryString} />
       <MovieList movies={visibleMovies} />
     </main>
   );
