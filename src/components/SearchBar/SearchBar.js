@@ -1,22 +1,10 @@
 // import { useState, useEffect } from 'react';
-import { SearchBox, Form, SearchButton, Input } from './SearchBar.styled.jsx';
+import {  Form, SearchButton, Input } from './SearchBar.styled.jsx';
 
-export const SearchBar = ({value, onSubmit }) => {
-  // const [value, setValue] = useState('');
-
-  // useEffect(() => {
-  //   value && submit(value);
-  // }, [value, submit]);
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const trimmedInputValue = e.currentTarget.elements.searchInput.value.trim();
-  //   setValue(trimmedInputValue);
-  // };
-
+export const SearchBar = ({ value, onChange }) => {
+  
   return (
-    <SearchBox>
-      <Form onSubmit={(e) => onSubmit(e.currentTarget.elements.searchInput.value.trim())}>
+    <Form>
         <SearchButton type="submit" />
         <Input
           type="text"
@@ -25,8 +13,8 @@ export const SearchBar = ({value, onSubmit }) => {
           placeholder="Search images and photos"
           name="searchInput"
           value={value}
+          onChange={e => onChange(e.target.value)}
         />
       </Form>
-    </SearchBox>
   );
 };
