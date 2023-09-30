@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import getMoviesBySearch from 'components/services/search-movies';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
+// import fetchMovies from 'components/services/fetch-movies';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
@@ -22,8 +23,7 @@ const Movies = () => {
         setFoundMovies(prevState => [...prevState, ...data.results]);
       } catch (error) {
         console.log(error.message);
-      } finally {
-      }
+      } 
     };
     query && fetchMovies();
   }, [query]);
