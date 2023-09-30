@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+
 import {  Form, SearchButton, Input } from './SearchBar.styled.jsx';
 
 export const SearchBar = ({ value, onChange }) => {

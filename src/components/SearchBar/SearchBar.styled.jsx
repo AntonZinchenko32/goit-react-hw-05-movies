@@ -7,7 +7,7 @@ export const Form = styled.form`
   width: 100%;
   max-width: 600px;
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 6px;
   overflow: hidden;
   border: 1px solid black;
 `;
