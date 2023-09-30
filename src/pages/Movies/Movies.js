@@ -9,6 +9,9 @@ const Movies = () => {
 
   const [movies, setMovies] = useState([]);
 
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     // Записуємо дані з бекенду
     const fetchMovies = async () => {
@@ -25,24 +28,17 @@ const Movies = () => {
     query && fetchMovies();
   }, [query]);
 
+
   const handleSearch = useCallback(value => {
     setQuery(value);
     setMovies([]);
   }, []);
 
-  // Скопійована логіка **********************************************************
-  // const movies =  getProducts();
-
-  const [searchParams, setSearchParams] = useSearchParams();
   const movieTitle = searchParams.get('title') ?? '';
-
-  // const visibleMovies = movies.filter(movie =>
-  //   movie.title.toLowerCase().includes(movieTitle.toLowerCase())
-  // );
 
   const updateQueryString = title => {
     const nextParams = title !== '' ? { title } : {};
-    setSearchParams(nextParams);
+    setSearchParams(nextParams)
   };
 
   return (
