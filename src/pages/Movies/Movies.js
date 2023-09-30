@@ -7,7 +7,7 @@ import { MovieList } from 'components/MovieList/MovieList';
 const Movies = () => {
   const [query, setQuery] = useState('');
 
-  const [movies, setMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);
 
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +19,7 @@ const Movies = () => {
         const data = await getMoviesBySearch(query);
         console.log(data.results);
 
-        setMovies(prevState => [...prevState, ...data.results]);
+        setFoundMovies(prevState => [...prevState, ...data.results]);
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -31,7 +31,7 @@ const Movies = () => {
 
   const handleSearch = useCallback(value => {
     setQuery(value);
-    setMovies([]);
+    setFoundMovies([]);
   }, []);
 
   const movieTitle = searchParams.get('title') ?? '';
@@ -48,7 +48,7 @@ const Movies = () => {
         onChange={updateQueryString}
         onSubmit={handleSearch}
       />
-      <MovieList movies={movies} />
+      <MovieList movies={foundMovies} />
     </main>
   );
 };
