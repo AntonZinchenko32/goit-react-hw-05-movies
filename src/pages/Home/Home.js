@@ -19,7 +19,12 @@ const Home = () => {
     fetchMovies();
   }, []);
 
-  return <MovieList movies={trendingMovies} />;
+  return (
+    <>
+      <h1>Trending today</h1>
+      <MovieList movies={trendingMovies} />
+    </>
+  );
 };
 
 export default Home;
