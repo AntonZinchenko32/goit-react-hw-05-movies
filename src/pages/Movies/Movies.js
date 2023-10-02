@@ -56,7 +56,7 @@ const Movies = () => {
         onChange={updateQueryString}
         onSubmit={handleSearch}
       />
-      {foundMovies.length !== 0 && <MovieList movies={foundMovies} />}
+      {foundMovies.length !== 0 && <MovieList movies={foundMovies} useDirection='' />}
     </main>
   );
 };

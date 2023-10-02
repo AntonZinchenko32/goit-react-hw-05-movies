@@ -24,7 +24,7 @@ const Home = () => {
       {trendingMovies.length !== 0 && (
         <>
           <h1>Trending today</h1>
-          <MovieList movies={trendingMovies} />
+          <MovieList movies={trendingMovies} useDirection="/movies/" />
         </>
       )}
     </main>
