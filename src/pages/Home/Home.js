@@ -20,10 +20,14 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <h1>Trending today</h1>
-      <MovieList movies={trendingMovies} />
-    </>
+    <main>
+      {trendingMovies.length !== 0 && (
+        <>
+          <h1>Trending today</h1>
+          <MovieList movies={trendingMovies} />
+        </>
+      )}
+    </main>
   );
 };
 
