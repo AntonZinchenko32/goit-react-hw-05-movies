@@ -30,7 +30,7 @@ const MovieDetails = () => {
 
   return (
       <main>
-        <BackLink to={backLinkHref}>Back to movies search</BackLink>
+        <BackLink to={backLinkHref}>Back to movies</BackLink>
         <img src="https://via.placeholder.com/960x240" alt="" />
         <div>
           {movie && <h2>
