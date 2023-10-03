@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const getMovieCastInfo = async id => {
+const getMovieReviews = async id => {
   const options = {
     method: 'GET',
-    url: `https://api.themoviedb.org/3/movie/${id}/credits`,
-    params: { language: 'en-US' },
+    url: `https://api.themoviedb.org/3/movie/${id}/reviews`,
+    params: { language: 'en-US', page: '1' },
     headers: {
       accept: 'application/json',
       Authorization:
@@ -15,5 +15,4 @@ const getMovieCastInfo = async id => {
   const { data } = await axios.request(options);
   return data;
 };
-
-export default getMovieCastInfo;
+export default getMovieReviews;
