@@ -40,8 +40,7 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  console.log(location);
-  console.log(backLinkHref);
+  
 
   return (
     <main>
