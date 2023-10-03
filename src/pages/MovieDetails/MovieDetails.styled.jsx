@@ -44,6 +44,7 @@ export const ListItem = styled.li`
 
 export const StyledLink = styled(Link)`
   font-size: 24px;
+  color: blue;
   &:hover {
     text-decoration: underline;
   }

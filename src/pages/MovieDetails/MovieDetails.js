@@ -98,12 +98,12 @@ const MovieDetails = () => {
             <ul>
               <ListItem>
                 <StyledLink to="cast" state={{ from: backLinkHref }}>
-                  -- Cast --
+                  Cast 
                 </StyledLink>
               </ListItem>
               <ListItem>
                 <StyledLink to="reviews" state={{ from: backLinkHref }}>
-                  -- Reviews --
+                  Reviews 
                 </StyledLink>
               </ListItem>
             </ul>
