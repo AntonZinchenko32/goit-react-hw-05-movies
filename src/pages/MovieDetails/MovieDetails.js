@@ -40,6 +40,8 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
+  console.log(location);
+  console.log(backLinkHref);
 
   return (
     <main>
@@ -82,8 +84,8 @@ const MovieDetails = () => {
           <AdditionalInfo>
             <h2>Additional information</h2>
             <ul>
-              <ListItem><StyledLink to="cast">-- Cast --</StyledLink></ListItem>
-              <ListItem><StyledLink to="reviews">-- Reviews --</StyledLink></ListItem>
+              <ListItem><StyledLink to="cast" state={{from:backLinkHref}}>-- Cast --</StyledLink></ListItem>
+              <ListItem><StyledLink to="reviews" state={{from:backLinkHref}}>-- Reviews --</StyledLink></ListItem>
             </ul>
           </AdditionalInfo>
           <Suspense fallback={<div>Loading subpage...</div>}>
