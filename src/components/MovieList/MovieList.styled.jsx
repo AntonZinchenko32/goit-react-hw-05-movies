@@ -6,6 +6,7 @@ export const Container = styled.div`
 `;
 
 export const CardWrapper = styled.li`
+  width: fit-content;
   > a {
     text-decoration: none;
   }
