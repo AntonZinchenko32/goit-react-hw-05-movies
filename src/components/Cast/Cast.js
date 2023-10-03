@@ -17,6 +17,7 @@ const Cast = () => {
         const data = await getMovieCastInfo(movieId);
         setCast(data.cast.slice(0, 10));
       } catch (error) {
+        console.log(error.message);
       }
     };
     movieId && fetchMovie();
