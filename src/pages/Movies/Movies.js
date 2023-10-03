@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import getMoviesBySearch from 'components/services/search-movies';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
+import { Loader } from 'components/Loader/Loader';
 
 const Movies = () => {
   const [queryForSubmit, setQueryForSubmit] = useState('');
@@ -11,6 +12,8 @@ const Movies = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const query = searchParams.get('search') ?? '';
 
@@ -18,13 +21,16 @@ const Movies = () => {
 
 
   // Записуємо дані з бекенду
-    const fetchMovies = useCallback(async searchText => {
+  const fetchMovies = useCallback(async searchText => {
+      setIsLoading(true);
       try {
         const data = await getMoviesBySearch(searchText);
 
         setFoundMovies(data.results);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setIsLoading(false);
       }
     },[]) 
 
@@ -56,6 +62,7 @@ const Movies = () => {
         onChange={updateQueryString}
         onSubmit={handleSearch}
       />
+      {isLoading && <Loader />}
       {foundMovies.length !== 0 && <MovieList movies={foundMovies} useDirection='' />}
     </main>
   );

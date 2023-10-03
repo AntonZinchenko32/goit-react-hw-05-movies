@@ -4,6 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import getMovieById from 'components/services/get-movie-details';
 import { useState, useEffect } from 'react';
+import { Loader } from 'components/Loader/Loader';
 import {
   MovieDetailsBox,
   MovieImage,
@@ -18,6 +19,7 @@ import {
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultImg =
     'https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg';
@@ -27,12 +29,15 @@ const MovieDetails = () => {
   useEffect(() => {
     // Записуємо дані з бекенду
     const fetchMovie = async () => {
+      setIsLoading(true)
       try {
         const data = await getMovieById(movieId);
 
         setMovie(data);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
     movieId && fetchMovie();
@@ -43,6 +48,7 @@ const MovieDetails = () => {
 
   return (
     <main>
+      {isLoading && <Loader />}
       {movie && (
         <>
           <BackLink to={backLinkHref}>Back to movies list</BackLink>
@@ -102,7 +108,7 @@ const MovieDetails = () => {
               </ListItem>
             </ul>
           </AdditionalInfo>
-          <Suspense fallback={<div>Loading subpage...</div>}>
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </>

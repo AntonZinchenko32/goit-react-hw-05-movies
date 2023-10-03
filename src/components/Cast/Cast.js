@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ListItem, InfoBox, Image } from './Cast.styled';
 
+
 const Cast = () => {
   const { movieId } = useParams();
 
