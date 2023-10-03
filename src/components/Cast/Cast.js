@@ -25,7 +25,7 @@ const Cast = () => {
 
   return (
     <main>
-      {cast && cast.length !== 0 ? <ul>
+      {cast && <ul>
         {cast.map(actor => (
           <ListItem key={actor.id}>
             <Image
@@ -43,7 +43,7 @@ const Cast = () => {
             </InfoBox>
           </ListItem>
         ))}
-      </ul> : <h2>(The cast is unknown)</h2>}
+      </ul>}
     </main>
   );
 };
