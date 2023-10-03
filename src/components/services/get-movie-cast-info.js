@@ -3,7 +3,7 @@ import axios from 'axios';
 const getMovieCastInfo = async id => {
       const options = {
   method: 'GET',
-  url: 'https://api.themoviedb.org/3/movie/movie_id/credits',
+  url: `https://api.themoviedb.org/3/movie/${id}/credits`,
   params: {language: 'en-US'},
   headers: {
     accept: 'application/json',
@@ -12,6 +12,7 @@ const getMovieCastInfo = async id => {
 };
 
     const { data } = await axios.request(options)
+    
     return data
 }
   
