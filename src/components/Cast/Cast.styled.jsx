@@ -16,3 +16,7 @@ export const InfoBox = styled.div`
   gap: 10px;
   flex-direction: column;
 `;
+export const NotFoundMessage = styled.h2`
+  display: flex;
+  justify-content: center;
+`;
