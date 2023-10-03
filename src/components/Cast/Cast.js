@@ -1,9 +1,14 @@
+import getMovieCastInfo from "components/services/get-movie-cast-info";
+import { useParams } from "react-router-dom";
+
 
 const Cast = () => {
+  
+
   return (
-    <div>
-      
-    </div>
+    <main>
+      <h1>Hello</h1>
+    </main>
   )
 };
 

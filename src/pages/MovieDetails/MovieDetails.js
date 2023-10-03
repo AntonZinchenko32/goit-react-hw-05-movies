@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
 import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import getMovieById from 'components/services/get-movie-details';
@@ -9,6 +11,9 @@ import {
   Popularity,
   InfoBox,
   Info,
+  AdditionalInfo,
+  StyledLink,
+  ListItem
 } from './MovieDetails.styled';
 
 const MovieDetails = () => {
@@ -40,7 +45,7 @@ const MovieDetails = () => {
     <main>
       {movie && (
         <>
-          <BackLink to={backLinkHref}>Back to movies</BackLink>
+          <BackLink to={backLinkHref}>Back to movies list</BackLink>
           <MovieDetailsBox>
             <MovieImage
               src={
@@ -66,14 +71,24 @@ const MovieDetails = () => {
               </Popularity>
               <InfoBox>
                 <b>Genres:</b>
-                <Info>{movie.genres.map(genre => genre.name + ' ')}</Info>
+                {movie.genres.length !== 0 ? <Info>{movie.genres.map(genre => genre.name + ' ')}</Info> : <span>(No genres info)</span>}
               </InfoBox>
               <InfoBox>
                 <b>Overview</b>
-                <Info>{movie.overview}</Info>
+                {movie.overview ? <Info>{movie.overview}</Info> : <span>(There are no overview, sorry)</span>}
               </InfoBox>
             </MovieInfo>
           </MovieDetailsBox>
+          <AdditionalInfo>
+            <h2>Additional information</h2>
+            <ul>
+              <ListItem><StyledLink to="cast">-- Cast --</StyledLink></ListItem>
+              <ListItem><StyledLink to="reviews">-- Reviews --</StyledLink></ListItem>
+            </ul>
+          </AdditionalInfo>
+          <Suspense fallback={<div>Loading subpage...</div>}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </main>
