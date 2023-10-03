@@ -4,6 +4,7 @@ import getMoviesBySearch from 'components/services/search-movies';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MovieList } from 'components/MovieList/MovieList';
 import { Loader } from 'components/Loader/Loader';
+import { NotFoundMessage } from './Movies.styled';
 
 const Movies = () => {
   const [queryForSubmit, setQueryForSubmit] = useState('');
@@ -27,6 +28,7 @@ const Movies = () => {
         const data = await getMoviesBySearch(searchText);
 
         setFoundMovies(data.results);
+        console.log(data.results);
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -63,7 +65,7 @@ const Movies = () => {
         onSubmit={handleSearch}
       />
       {isLoading && <Loader />}
-      {foundMovies.length !== 0 && <MovieList movies={foundMovies} useDirection='' />}
+      {foundMovies.length !== 0 ? <MovieList movies={foundMovies} useDirection='' /> : <NotFoundMessage>Couldn't find any movies for your request, sorry</NotFoundMessage>}
     </main>
   );
 };

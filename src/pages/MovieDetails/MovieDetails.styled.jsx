@@ -34,8 +34,8 @@ export const Info = styled.span`
 
 export const AdditionalInfo = styled.div`
   margin-top: 15px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 `;
 
 export const ListItem = styled.li`

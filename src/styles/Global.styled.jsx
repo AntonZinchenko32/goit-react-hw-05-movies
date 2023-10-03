@@ -11,4 +11,8 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+ul {
+  padding: 0;
+  list-style: none;
 }`;

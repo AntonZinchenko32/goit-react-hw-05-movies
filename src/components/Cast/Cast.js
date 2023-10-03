@@ -1,7 +1,7 @@
 import getMovieCastInfo from 'components/services/get-movie-cast-info';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ListItem, InfoBox, Image, NotFoundMessage } from './Cast.styled';
+import { Container, ListItem, InfoBox, Image, NotFoundMessage } from './Cast.styled';
 import { Loader } from 'components/Loader/Loader';
 
 const Cast = () => {
@@ -31,7 +31,7 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <main>
+    <Container>
       {isLoading && <Loader />}
       {cast && cast.length !== 0 ? (
         <ul>
@@ -58,7 +58,7 @@ const Cast = () => {
           <NotFoundMessage>Cast is not avaliable</NotFoundMessage>
         )
       )}
-    </main>
+    </Container>
   );
 };
 
