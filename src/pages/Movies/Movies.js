@@ -9,32 +9,29 @@ import { NotFoundMessage } from './Movies.styled';
 const Movies = () => {
   const [queryForSubmit, setQueryForSubmit] = useState('');
 
-  const [foundMovies, setFoundMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(false);
 
-
   const query = searchParams.get('search') ?? '';
 
-  const ref = useRef(query)
-
+  const ref = useRef(query);
 
   // Записуємо дані з бекенду
   const fetchMovies = useCallback(async searchText => {
-      setIsLoading(true);
-      try {
-        const data = await getMoviesBySearch(searchText);
+    setIsLoading(true);
+    try {
+      const data = await getMoviesBySearch(searchText);
 
-        setFoundMovies(data.results);
-        console.log(data.results);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    },[]) 
+      setFoundMovies(data.results);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     queryForSubmit && fetchMovies(queryForSubmit);
@@ -44,13 +41,10 @@ const Movies = () => {
     ref.current && fetchMovies(ref.current);
   }, [fetchMovies]);
 
-
-
   const handleSearch = useCallback(value => {
     setQueryForSubmit(value);
+    setFoundMovies(null)
   }, []);
-
-  
 
   const updateQueryString = search => {
     const nextParams = search !== '' ? { search } : {};
@@ -65,7 +59,15 @@ const Movies = () => {
         onSubmit={handleSearch}
       />
       {isLoading && <Loader />}
-      {foundMovies.length !== 0 ? <MovieList movies={foundMovies} useDirection='' /> : <NotFoundMessage>Couldn't find any movies for your request, sorry</NotFoundMessage>}
+      {foundMovies && foundMovies.length !== 0 ? (
+        <MovieList movies={foundMovies} useDirection="" />
+      ) : (
+        foundMovies !== null && (
+          <NotFoundMessage>
+            Couldn't find any movies for your request, sorry
+          </NotFoundMessage>
+        )
+      )}
     </main>
   );
 };
