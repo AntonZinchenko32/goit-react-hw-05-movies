@@ -2,7 +2,14 @@ import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import getMovieById from 'components/services/get-movie-details';
 import { useState, useEffect } from 'react';
-import { MovieDetailsBox, MovieImage, MovieInfo, Popularity, Genres, Info } from './MovieDetails.styled';
+import {
+  MovieDetailsBox,
+  MovieImage,
+  MovieInfo,
+  Popularity,
+  InfoBox,
+  Info,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -17,7 +24,7 @@ const MovieDetails = () => {
     const fetchMovie = async () => {
       try {
         const data = await getMovieById(movieId);
-        console.log(data);
+        
         setMovie(data);
       } catch (error) {
         console.log(error.message);
@@ -41,17 +48,30 @@ const MovieDetails = () => {
                   ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                   : defaultImg
               }
-              width={350}
               alt="poster"
             />
             <MovieInfo>
               {movie && (
                 <h2>
-                  {movie.title} ({ movie.release_date ? movie.release_date.slice(0,4) : 'release year unknown'})
+                  {movie.title} (
+                  {movie.release_date
+                    ? movie.release_date.slice(0, 4)
+                    : 'release year unknown'}
+                  )
                 </h2>
               )}
-              <Popularity><b>Popularity:</b><Info> {movie.popularity}</Info></Popularity>
-              <Genres><b>Genres:</b><Info>{movie.genres.map(genre => genre.name + ' ')}</Info></Genres>
+              <Popularity>
+                <b>Popularity:</b>
+                <Info> {movie.popularity}</Info>
+              </Popularity>
+              <InfoBox>
+                <b>Genres:</b>
+                <Info>{movie.genres.map(genre => genre.name + ' ')}</Info>
+              </InfoBox>
+              <InfoBox>
+                <b>Overview</b>
+                <Info>{movie.overview}</Info>
+              </InfoBox>
             </MovieInfo>
           </MovieDetailsBox>
         </>
