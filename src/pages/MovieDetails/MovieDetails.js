@@ -2,7 +2,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import getMovieById from 'components/services/get-movie-details';
 import { useState, useEffect } from 'react';
-import { MovieDetailsBox, MovieImage } from './MovieDetails.styled';
+import { MovieDetailsBox, MovieImage, MovieInfo, Popularity, Genres, Info } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -41,24 +41,18 @@ const MovieDetails = () => {
                   ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                   : defaultImg
               }
-              width={250}
+              width={350}
               alt="poster"
             />
-            <div>
+            <MovieInfo>
               {movie && (
                 <h2>
-                  Movie - {movie.title} - {movieId}
+                  {movie.title} ({ movie.release_date ? movie.release_date.slice(0,4) : 'release year unknown'})
                 </h2>
               )}
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Doloribus sunt excepturi nesciunt iusto dignissimos assumenda ab
-                quae cupiditate a, sed reprehenderit? Deleniti optio quasi, amet
-                natus reiciendis atque fuga dolore? Lorem, ipsum dolor sit amet
-                consectetur adipisicing elit. Impedit suscipit quisquam incidunt
-                commodi fugiat aliquam praesentium ipsum quos unde voluptatum?
-              </p>
-            </div>
+              <Popularity><b>Popularity:</b><Info> {movie.popularity}</Info></Popularity>
+              <Genres><b>Genres:</b><Info>{movie.genres.map(genre => genre.name + ' ')}</Info></Genres>
+            </MovieInfo>
           </MovieDetailsBox>
         </>
       )}
