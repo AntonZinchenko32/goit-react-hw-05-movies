@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import getMovieById from 'components/services/get-movie-details';
@@ -13,7 +13,7 @@ import {
   Info,
   AdditionalInfo,
   StyledLink,
-  ListItem
+  ListItem,
 } from './MovieDetails.styled';
 
 const MovieDetails = () => {
@@ -29,7 +29,7 @@ const MovieDetails = () => {
     const fetchMovie = async () => {
       try {
         const data = await getMovieById(movieId);
-        
+
         setMovie(data);
       } catch (error) {
         console.log(error.message);
@@ -40,7 +40,6 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
-  
 
   return (
     <main>
@@ -72,19 +71,35 @@ const MovieDetails = () => {
               </Popularity>
               <InfoBox>
                 <b>Genres:</b>
-                {movie.genres.length !== 0 ? <Info>{movie.genres.map(genre => genre.name + ' ')}</Info> : <span>(No genres info)</span>}
+                {movie.genres.length !== 0 ? (
+                  <Info>{movie.genres.map(genre => genre.name + ' ')}</Info>
+                ) : (
+                  <span>(No genres info)</span>
+                )}
               </InfoBox>
               <InfoBox>
                 <b>Overview</b>
-                {movie.overview ? <Info>{movie.overview}</Info> : <span>(There are no overview, sorry)</span>}
+                {movie.overview ? (
+                  <Info>{movie.overview}</Info>
+                ) : (
+                  <span>(There are no overview, sorry)</span>
+                )}
               </InfoBox>
             </MovieInfo>
           </MovieDetailsBox>
           <AdditionalInfo>
             <h2>Additional information</h2>
             <ul>
-              <ListItem><StyledLink to="cast" state={{from:backLinkHref}}>-- Cast --</StyledLink></ListItem>
-              <ListItem><StyledLink to="reviews" state={{from:backLinkHref}}>-- Reviews --</StyledLink></ListItem>
+              <ListItem>
+                <StyledLink to="cast" state={{ from: backLinkHref }}>
+                  -- Cast --
+                </StyledLink>
+              </ListItem>
+              <ListItem>
+                <StyledLink to="reviews" state={{ from: backLinkHref }}>
+                  -- Reviews --
+                </StyledLink>
+              </ListItem>
             </ul>
           </AdditionalInfo>
           <Suspense fallback={<div>Loading subpage...</div>}>
